@@ -9,6 +9,7 @@ import {
 } from "@clerk/nextjs";
 import NavBar, { Navbar } from "./components/NavBar";
 import { ThemeProvider } from "./components/components_theme-provider";
+import { dark } from "@clerk/themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}

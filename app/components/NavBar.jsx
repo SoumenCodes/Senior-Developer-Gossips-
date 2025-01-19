@@ -17,6 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { UserButton } from "@clerk/nextjs";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -36,19 +37,14 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-primary">
-            MyApp
+            Senior Developer Gossips
           </Link>
           <div className="hidden md:flex space-x-4 items-center">
             {navItems.map((item) => (
               <NavItem key={item.href} {...item} pathname={pathname} />
             ))}
             <ThemeToggle />
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>
-                <User className="h-5 w-5" />
-              </AvatarFallback>
-            </Avatar>
+            <UserButton />
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>

@@ -1,8 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ForumCard } from "../components/ForumCard";
 import JavaScriptImg from "@/public/Images/javascript.png";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const forums = [
   {
@@ -58,35 +61,54 @@ const forums = [
 ];
 
 export default function ForumsPage() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="container mx-auto py-12 px-4"
-      >
-        <h1 className="text-4xl font-bold text-gray-800 dark:text-white text-center mb-12">
-          Explore Our Tech Forums
-        </h1>
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
+      <div className="container mx-auto px-4 py-16">
+        <header className="text-center mb-16">
+          <motion.h1
+            className="text-4xl md:text-6xl font-extrabold text-primary mb-4"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Explore Our Tech Forums
+          </motion.h1>
+          <motion.p
+            className="text-xl md:text-2xl text-muted-foreground mb-8"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Where seasoned devs spill the tea on tech
+          </motion.p>
+        </header>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+          variants={{
+            visible: { transition: { staggerChildren: 0.2 } },
+          }}
         >
           {forums.map((forum, index) => (
             <motion.div
               key={forum.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+              }}
             >
               <ForumCard {...forum} />
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }

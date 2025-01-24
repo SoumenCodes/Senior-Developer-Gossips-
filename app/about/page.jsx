@@ -8,12 +8,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Code, Users, Zap, Globe, Coffee } from "lucide-react";
 import About from "@/public/Images/About.png";
+import { useRouter } from "next/navigation";
 
 export default function AboutPage() {
   const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const route = useRouter();
 
   useEffect(() => {
     setIsVisible(true);
@@ -180,13 +182,19 @@ export default function AboutPage() {
               <Badge
                 key={topic}
                 variant="secondary"
-                className="text-lg py-2 px-4"
+                className="text-lg py-2 px-4 bg-black "
               >
                 #{topic}
               </Badge>
             ))}
           </div>
-          <Button size="lg" className="mt-8 animate-pulse">
+          <Button
+            size="lg"
+            className="mt-8 animate-pulse"
+            onClick={() => {
+              route.push("/forums");
+            }}
+          >
             Start Gossiping Now <ArrowRight className="ml-2" />
           </Button>
         </motion.section>

@@ -13,7 +13,7 @@ export default function Home() {
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <p className="text-muted-foreground">
-          &copy; 2023 Senior Developer Gossips. All rights reserved.
+          &copy; 2025 Senior Developer Gossips. All rights reserved.
         </p>
       </footer>
     </div>

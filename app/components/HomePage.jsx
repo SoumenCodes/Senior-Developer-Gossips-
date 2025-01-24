@@ -26,9 +26,11 @@ import {
   Group,
   FileUp,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
+  const route = useRouter();
 
   useEffect(() => {
     setIsVisible(true);
@@ -87,7 +89,13 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                <Button size="lg" className="animate-pulse">
+                <Button
+                  size="lg"
+                  className="animate-pulse"
+                  onClick={() => {
+                    route.push("/forums");
+                  }}
+                >
                   Get Started <ArrowRight className="ml-2" />
                 </Button>
               </motion.div>

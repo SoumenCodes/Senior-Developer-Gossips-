@@ -6,10 +6,11 @@ import { ForumCard } from "../components/ForumCard";
 import JavaScriptImg from "@/public/Images/javascript.png";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const forums = [
   {
-    title: "Next.js",
+    title: "Nextjs",
     description:
       "Explore the latest features and best practices in Next.js development. Join our community of developers building modern web applications.",
     image: "/placeholder.svg?height=200&width=384",
@@ -17,6 +18,18 @@ const forums = [
     topics: ["SSR", "API Routes", "App Router"],
     users: 12345,
     trending: true,
+    id: 1,
+  },
+  {
+    title: "React js",
+    description:
+      "Explore the latest features and best practices in React.js development. Join our community of developers building modern web applications.",
+    image: "/placeholder.svg?height=200&width=384",
+    icon: "⚛️",
+    topics: ["SSR", "API Routes", "App Router"],
+    users: 12345,
+    trending: true,
+    id: 2,
   },
   {
     title: "JavaScript",
@@ -27,6 +40,7 @@ const forums = [
     topics: ["ES6+", "Async/Await", "Frameworks"],
     users: 56789,
     trending: false,
+    id: 3,
   },
   {
     title: "Python",
@@ -37,6 +51,7 @@ const forums = [
     topics: ["Data Science", "Web Scraping", "Django"],
     users: 43210,
     trending: true,
+    id: 4,
   },
   {
     title: "CSS",
@@ -47,6 +62,7 @@ const forums = [
     topics: ["Flexbox", "Grid", "Animations"],
     users: 34567,
     trending: false,
+    id: 5,
   },
   {
     title: "PHP",
@@ -57,10 +73,12 @@ const forums = [
     topics: ["Laravel", "Symfony", "WordPress"],
     users: 23456,
     trending: false,
+    id: 6,
   },
 ];
 
 export default function ForumsPage() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -102,6 +120,9 @@ export default function ForumsPage() {
               variants={{
                 hidden: { opacity: 0, y: 50 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+              }}
+              onClick={() => {
+                router.push(`/forums/forum/${forum.title}`);
               }}
             >
               <ForumCard {...forum} />

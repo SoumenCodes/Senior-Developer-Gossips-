@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserButton } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -31,6 +32,8 @@ export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const user = useUser();
+  console.log(user?.user?.id);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">

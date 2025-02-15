@@ -20,33 +20,28 @@ const userName = "Soumen_Admin";
 const userToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8ycnExenhaYnVjalVOQ1dFZjVxWDdheEJzdTcifQ.OP_W40H5vkfb5N6ce2KVkiNF6hbzdAXLSk_XmThZvlE";
 
-// const user = {
-//   id: userId,
-//   name: userName,
-//   image: `https://getstream.io/random_png/?name=${userName}`,
-// };
-
 const StremeComponent = ({ id, clerkUser }) => {
   const [channel, setChannel] = useState();
-  const User = useUser();
-  console.log("USER => ", User);
+  const { user: userObj, isLoaded } = useUser();
   const token = clerkUser.token;
-  console.log("TOKEN TOKEN", token);
 
+  // Create user object with the correct image URL
   const user = {
     id: clerkUser?.id,
-    name: clerkUser?.name,
-    image: User.imageUrl,
+    name: clerkUser?.name || clerkUser?.fullName,
+    image: userObj?.imageUrl, // Using the image URL from Clerk
   };
 
+  // Initialize the chat client
   const client = useCreateChatClient({
     apiKey,
     tokenOrProvider: token,
     userData: user,
   });
 
+  // Create/connect to the channel once client is ready
   useEffect(() => {
-    if (!client) return;
+    if (!client || !isLoaded) return;
 
     const channel = client.channel("messaging", id, {
       image: "https://getstream.io/random_png/?name=react",
@@ -55,9 +50,21 @@ const StremeComponent = ({ id, clerkUser }) => {
     });
 
     setChannel(channel);
-  }, [client]);
+  }, [client, isLoaded, id]);
 
-  if (!client) return <div>Setting up client & connection...</div>;
+  // Update user data whenever the image URL changes
+  useEffect(() => {
+    if (!client || !isLoaded || !userObj?.imageUrl) return;
+
+    // Update the user with the current image URL
+    client.upsertUser({
+      id: clerkUser?.id,
+      name: clerkUser?.name || clerkUser?.fullName,
+      image: userObj.imageUrl,
+    });
+  }, [client, userObj?.imageUrl, isLoaded, clerkUser]);
+
+  if (!client || !isLoaded) return <div>Setting up client & connection...</div>;
 
   return (
     <Chat client={client}>

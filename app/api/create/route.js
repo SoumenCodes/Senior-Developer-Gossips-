@@ -19,13 +19,13 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const serverClient = StreamChat.getInstance(api_key, api_secret);
+  const serverClient = await StreamChat.getInstance(api_key, api_secret);
   // Create User Token
 
   // console.log(token);
   const user = await request.json();
   console.log(user);
-  const token = serverClient.createToken(user.data.id);
+  const token = await serverClient.createToken(user.data.id);
   console.log("A NEW USER HAVE BEEN CREATED", token);
 
   const client = await clerkClient();

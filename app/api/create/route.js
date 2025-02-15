@@ -52,3 +52,44 @@ export async function POST(request) {
   });
   return Response.json({ message: "Hello World" });
 }
+
+// export async function DELETE(request) {
+//   const serverClient = StreamChat.getInstance(api_key, api_secret);
+
+//   // List of channel IDs to delete
+//   const channelIds = [
+//     "Next-JS",
+//     "Nextjs",
+//     "JavaScript",
+//     "2",
+//     "1",
+//     "custom_channel_id",
+//     "CSS",
+//     "Python",
+//     "PHP",
+//     "React-JS"
+//   ];
+
+//   // Delete each channel
+//   for (const channelId of channelIds) {
+//     const channel = serverClient.channel("messaging", channelId);
+//     await channel.delete();
+//   }
+
+//   return Response.json({ message: "All channels deleted successfully" });
+// }
+
+// ============== all channel id -------------->
+// export async function GET(request) {
+//   const serverClient = StreamChat.getInstance(api_key, api_secret);
+
+//   // Fetch all channels
+//   const filter = {};
+//   const sort = [{ last_message_at: -1 }];
+//   const channels = await serverClient.queryChannels(filter, sort);
+
+//   // Extract channel IDs
+//   const channelIds = channels.map(channel => channel.id);
+
+//   return Response.json({ channelIds });
+// }

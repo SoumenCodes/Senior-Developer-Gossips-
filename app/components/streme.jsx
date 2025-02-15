@@ -28,15 +28,15 @@ const userToken =
 
 const StremeComponent = ({ id, clerkUser }) => {
   const [channel, setChannel] = useState();
-  // const clerkUser = useUser();
-  // console.log("USER => ", clerkUser);
+  const User = useUser();
+  console.log("USER => ", User);
   const token = clerkUser.token;
   console.log("TOKEN TOKEN", token);
 
   const user = {
     id: clerkUser?.id,
     name: clerkUser?.name,
-    image: `https://getstream.io/random_png/?name=${userName}`,
+    image: User.imageUrl,
   };
 
   const client = useCreateChatClient({

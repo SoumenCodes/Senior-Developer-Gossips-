@@ -1,4 +1,5 @@
 "use client";
+import { useUser } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
 import {
   useCreateChatClient,
@@ -19,17 +20,28 @@ const userName = "Soumen_Admin";
 const userToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8ycnExenhaYnVjalVOQ1dFZjVxWDdheEJzdTcifQ.OP_W40H5vkfb5N6ce2KVkiNF6hbzdAXLSk_XmThZvlE";
 
-const user = {
-  id: userId,
-  name: userName,
-  image: `https://getstream.io/random_png/?name=${userName}`,
-};
+// const user = {
+//   id: userId,
+//   name: userName,
+//   image: `https://getstream.io/random_png/?name=${userName}`,
+// };
 
-const StremeComponent = ({ id }) => {
+const StremeComponent = ({ id, clerkUser }) => {
   const [channel, setChannel] = useState();
+  // const clerkUser = useUser();
+  // console.log("USER => ", clerkUser);
+  const token = clerkUser.token;
+  console.log("TOKEN TOKEN", token);
+
+  const user = {
+    id: clerkUser?.id,
+    name: clerkUser?.name,
+    image: `https://getstream.io/random_png/?name=${userName}`,
+  };
+
   const client = useCreateChatClient({
     apiKey,
-    tokenOrProvider: userToken,
+    tokenOrProvider: token,
     userData: user,
   });
 

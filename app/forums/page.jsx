@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 const forums = [
   {
-    title: "Nextjs",
+    title: "Next-JS",
     description:
       "Explore the latest features and best practices in Next.js development. Join our community of developers building modern web applications.",
     image: "/placeholder.svg?height=200&width=384",
@@ -21,7 +21,7 @@ const forums = [
     id: 1,
   },
   {
-    title: "React js",
+    title: "React-JS",
     description:
       "Explore the latest features and best practices in React.js development. Join our community of developers building modern web applications.",
     image: "/placeholder.svg?height=200&width=384",

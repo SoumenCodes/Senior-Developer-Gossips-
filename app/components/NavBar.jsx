@@ -32,8 +32,8 @@ export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const user = useUser();
-  console.log(user?.user?.id);
+  // const user = useUser();
+  // console.log(user?.user?.id);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
